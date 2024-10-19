@@ -102,4 +102,4 @@ example:AddToggle("Auto Farm Mobs", function(state)
     end
 end)
 
--- Outras funcionalidades podem ser adicionadas abaixo
+-- Outras funcionalidades
