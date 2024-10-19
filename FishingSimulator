@@ -1,39 +1,97 @@
-local AutoFishToggle = Section1:CreateToggle("AutoFish", nil, function(State)
-    go = State
-    while go do
-        task.wait(2.6)
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.FishCaught:FireServer()
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
-    end
-end)
-
-local WalkOnWaterToggle = Section1:CreateToggle("WalkOnWater", nil, function(State)
-    t = State
-    game:GetService("Workspace").Water.CanCollide = t
-end)
-
--- Exemplo de correção no connect e verificação de HumanoidRootPart
-local AutoKillMobsToggle = Section1:CreateToggle("Auto Kill Mobs", nil, function(State)
-    getgenv().Roof = State
-    game:GetService("RunService").Stepped:Connect(function()
-        if getgenv().Roof then
-            local character = game.Players.LocalPlayer.Character
-            if character and character:FindFirstChild("Humanoid") then
-                character.Humanoid:ChangeState(11)
-            end
-        end
-    end)
-
-    while task.wait(1) and getgenv().Roof do
-        pcall(function()
-            local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
-            if tool and tool:FindFirstChild("GripC1") and getNearestMob() then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getNearestMob().HumanoidRootPart.CFrame
-                for i = 1, 100 do
-                    game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.MonsterHit:FireServer(getNearestMob(), tool.Name, true)
-                end
-                game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
-            end
-        end)
-    end
-end)
+auto click circle:
+ 
+ 
+***insert preferred start/stop method***
+{
+ 
+ 
+		{
+		PixelSearch, FoundX, FoundY, 490, 173, 1687, 855, 0xFFFFFF, 20, Fast
+		if ErrorLevel
+		PixelSearch, FoundX, FoundY, 23, 390, 482, 760, 0xFFFFFF, 20, Fast
+		if ErrorLevel
+		sleep 1	
+ 
+			else		
+			{
+			sleep 10
+			MouseMove, FoundX+10, FoundY+20 , 2, 
+			sleep 10
+			click
+			}
+ 
+		}	
+}
+ 
+ 
+ 
+ 
+ 
+ 
+auto reel code:
+ 
+ 
+***insert preferred start/stop method***
+	{
+ 
+		PixelSearch, fishX, fishY, 585, 893, 1348, 903, 0x776255, 30, Fast
+		MouseMove, fishX, fishY , 0,
+		MouseGetPos, xpos, ypos 
+ 
+		PixelSearch, gbarX, gbarY, 610, 935, 1320, 935, 0x3D524B, 10, Fast
+ 
+		PixelSearch, rbarX, rbarY, 610, 935, 1320, 935, 0x25274F, 10, Fast
+ 
+		PixelSearch, barX, barY, 610, 935, 1320, 935, 0xFFFFFF, 0, Fast
+ 
+ 
+ 
+		if (xpos > 1000)
+			{
+			GuiControl,, CustomText, x = %xpos%
+			click down
+			sleep 250
+			click up
+			PixelSearch, fishX, fishY, 585, 893, 1348, 903, 0x776255, 30, Fast
+ 
+			MouseMove, fishX, fishY , 0,
+			MouseGetPos, xpos, ypos 	
+			}	
+			if (xpos < 800 && xpos > 200)
+			{
+			click up
+			sleep 300
+			PixelSearch, fishX, fishY, 585, 893, 1348, 903, 0x776255, 30, Fast
+ 
+			MouseMove, fishX, fishY , 0,
+			MouseGetPos, xpos, ypos 
+			}
+ 
+			if ( (gbarX < xpos || rbarX < xpos) )
+			{
+			click down
+			sleep 250
+			click up
+			PixelSearch, fishX, fishY, 585, 893, 1348, 903, 0x776255, 30, Fast
+			MouseMove, fishX, fishY , 0,
+			MouseGetPos, xpos, ypos 	
+			}	
+			if ( (gbarX > xpos || rbarX > xpos) )
+			{
+			click up
+			sleep 300
+			PixelSearch, fishX, fishY, 585, 893, 1348, 903, 0x776255, 30, Fast
+ 
+			MouseMove, fishX, fishY , 0,
+			MouseGetPos, xpos, ypos 
+			}
+ 
+ 
+ 
+ 
+click down
+sleep 60
+click up
+ 
+ 
+	}
